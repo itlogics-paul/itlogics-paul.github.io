@@ -178,6 +178,76 @@ a:hover{text-decoration:underline}
   border-color:var(--teal);box-shadow:0 0 0 3px rgba(74,191,176,.12);
 }
 .form-group textarea{resize:vertical;min-height:120px}
+
+/* ── HERO ENHANCEMENTS ── */
+@keyframes scanline{
+  0%{transform:translateY(-100%);opacity:0}
+  10%{opacity:1}
+  90%{opacity:1}
+  100%{transform:translateY(200vh);opacity:0}
+}
+.hero-circuit{
+  position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M0 40h30M50 40h30M40 0v30M40 50v30' stroke='rgba(74,191,176,0.12)' stroke-width='0.8' fill='none'/%3E%3Ccircle cx='40' cy='40' r='3' fill='none' stroke='rgba(74,191,176,0.18)' stroke-width='0.8'/%3E%3Ccircle cx='0' cy='40' r='1.5' fill='rgba(74,191,176,0.15)'/%3E%3Ccircle cx='80' cy='40' r='1.5' fill='rgba(74,191,176,0.15)'/%3E%3Ccircle cx='40' cy='0' r='1.5' fill='rgba(74,191,176,0.15)'/%3E%3Ccircle cx='40' cy='80' r='1.5' fill='rgba(74,191,176,0.15)'/%3E%3C/svg%3E");
+  background-repeat:repeat;
+  opacity:1;
+  pointer-events:none;
+}
+.hero-glow-1{
+  position:absolute;
+  width:600px;height:600px;
+  top:-200px;right:-100px;
+  background:radial-gradient(circle, rgba(74,191,176,0.08) 0%, transparent 65%);
+  pointer-events:none;
+}
+.hero-glow-2{
+  position:absolute;
+  width:400px;height:400px;
+  bottom:-150px;left:-80px;
+  background:radial-gradient(circle, rgba(74,191,176,0.05) 0%, transparent 65%);
+  pointer-events:none;
+}
+.hero-scan{
+  position:absolute;
+  left:0;right:0;
+  height:1px;
+  background:linear-gradient(90deg, transparent 0%, rgba(74,191,176,0.25) 30%, rgba(74,191,176,0.4) 50%, rgba(74,191,176,0.25) 70%, transparent 100%);
+  animation:scanline 8s linear infinite;
+  pointer-events:none;
+}
+.hero-corner-tl{
+  position:absolute;top:24px;left:24px;
+  width:40px;height:40px;
+  border-top:1.5px solid rgba(74,191,176,0.35);
+  border-left:1.5px solid rgba(74,191,176,0.35);
+  pointer-events:none;
+}
+.hero-corner-br{
+  position:absolute;bottom:24px;right:24px;
+  width:40px;height:40px;
+  border-bottom:1.5px solid rgba(74,191,176,0.35);
+  border-right:1.5px solid rgba(74,191,176,0.35);
+  pointer-events:none;
+}
+
+/* ── CIRCUIT GRID BACKGROUND ── */
+body{
+  background-color:#F5F8FA;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F8FA'/%3E%3Cpath d='M0 20h15M25 20h15M20 0v15M20 25v15' stroke='%23C4D8E8' stroke-width='0.6' fill='none'/%3E%3Ccircle cx='20' cy='20' r='2' fill='none' stroke='%23B0C8DC' stroke-width='0.6'/%3E%3Ccircle cx='0' cy='20' r='1.2' fill='%23B0C8DC'/%3E%3Ccircle cx='40' cy='20' r='1.2' fill='%23B0C8DC'/%3E%3Ccircle cx='20' cy='0' r='1.2' fill='%23B0C8DC'/%3E%3Ccircle cx='20' cy='40' r='1.2' fill='%23B0C8DC'/%3E%3C/svg%3E");
+  background-repeat:repeat;
+}
+/* Light canvas sections become semi-transparent so circuit shows through */
+.section,.section-sm{background:rgba(245,248,250,0.75)!important}
+/* Explicitly keep white sections and dark sections opaque */
+.site-nav,.site-footer,
+section[style*="background:var(--navy)"],
+section[style*="background:var(--teal"],
+section[style*="background:linear-gradient"],
+section[style*="padding:72px 0;background:var(--teal"],
+section[style*="padding:64px 0;background:var(--teal"]{background-attachment:local}
+/* Cards always white */
+.card{background:var(--white)!important}
+
 </style>
 
 
@@ -195,8 +265,14 @@ a:hover{text-decoration:underline}
 </nav>
 
 <!-- PAGE HEADER -->
-<section style="background:linear-gradient(135deg,var(--navy) 0%,#243447 100%);padding:72px 0 60px">
-  <div class="container">
+<section style="background:linear-gradient(135deg,var(--navy) 0%,#243447 100%);padding:72px 0 60px;position:relative;overflow:hidden">
+  <div class="hero-circuit" aria-hidden="true"></div>
+  <div class="hero-glow-1" aria-hidden="true"></div>
+  <div class="hero-glow-2" aria-hidden="true"></div>
+  <div class="hero-scan" aria-hidden="true"></div>
+  <div class="hero-corner-tl" aria-hidden="true"></div>
+  <div class="hero-corner-br" aria-hidden="true"></div>
+  <div class="container" style="position:relative;z-index:1">
     <div class="section-eyebrow" style="color:var(--teal)">What We Do</div>
     <h1 style="font-size:44px;font-weight:800;color:white;margin-bottom:14px;line-height:1.15">Services</h1>
     <p style="font-size:17px;color:rgba(255,255,255,.6);max-width:560px;line-height:1.7">Practical IT security and infrastructure services for small businesses and municipalities. No jargon. No unnecessary complexity.</p>
@@ -225,7 +301,7 @@ a:hover{text-decoration:underline}
       <p class="section-sub" style="margin-bottom:40px">Know where you stand. Our assessments produce scored, documented findings with a prioritized roadmap your team can act on — not just a report that sits on a shelf.</p>
     </div>
     <div class="grid-2">
-      <div style="padding:32px;background:var(--canvas);border-radius:var(--radius);border-top:4px solid var(--teal)">
+      <div style="padding:32px;background:rgba(245,248,250,0.7);border-radius:var(--radius);border-top:4px solid var(--teal)">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
           <span style="font-size:28px">🔍</span>
           <h3 style="font-size:20px;font-weight:700;color:var(--navy)">CIS v8.1 Security Assessment</h3>
@@ -235,7 +311,7 @@ a:hover{text-decoration:underline}
           <li style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start"><span style="color:var(--teal);flex-shrink:0;margin-top:2px">✓</span>Scored across all 18 control domains</li><li style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start"><span style="color:var(--teal);flex-shrink:0;margin-top:2px">✓</span>Current-state documentation</li><li style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start"><span style="color:var(--teal);flex-shrink:0;margin-top:2px">✓</span>Phased remediation roadmap</li><li style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start"><span style="color:var(--teal);flex-shrink:0;margin-top:2px">✓</span>Municipality and SMB variants available</li><li style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start"><span style="color:var(--teal);flex-shrink:0;margin-top:2px">✓</span>Retest / year-over-year tracking available</li>
         </ul>
       </div>
-      <div style="padding:32px;background:var(--canvas);border-radius:var(--radius);border-top:4px solid var(--tan)">
+      <div style="padding:32px;background:rgba(245,248,250,0.7);border-radius:var(--radius);border-top:4px solid var(--tan)">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
           <span style="font-size:28px">📊</span>
           <h3 style="font-size:20px;font-weight:700;color:var(--navy)">Technology Maturity Assessment</h3>
@@ -254,7 +330,7 @@ a:hover{text-decoration:underline}
 </section>
 
 <!-- ADVISORY -->
-<section class="section" style="background:var(--canvas)" id="advisory">
+<section class="section" style="background:rgba(245,248,250,0.7)" id="advisory">
   <div class="container">
     <div style="max-width:760px">
       <div class="section-eyebrow">Strategic Leadership</div>
@@ -301,7 +377,7 @@ a:hover{text-decoration:underline}
       </div>
     </div>
     <div class="grid-3">
-      <div style="padding:32px;background:var(--canvas);border-radius:var(--radius);border-top:4px solid var(--muted2);position:relative">
+      <div style="padding:32px;background:rgba(245,248,250,0.7);border-radius:var(--radius);border-top:4px solid var(--muted2);position:relative">
         
         <div style="font-family:var(--mono);font-size:10px;color:var(--muted2);font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">Core CIS</div>
         <h3 style="font-size:19px;font-weight:700;color:var(--navy);margin-bottom:8px">Security Framework Foundation</h3>
@@ -309,7 +385,7 @@ a:hover{text-decoration:underline}
         <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
           <li style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start"><span style="color:var(--muted2);flex-shrink:0;margin-top:2px">✓</span>7 CIS v8.1-aligned policy documents</li><li style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start"><span style="color:var(--muted2);flex-shrink:0;margin-top:2px">✓</span>All safeguards — full prescriptive language</li><li style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start"><span style="color:var(--muted2);flex-shrink:0;margin-top:2px">✓</span>Master Policy: governance, KPIs, oversight</li><li style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start"><span style="color:var(--muted2);flex-shrink:0;margin-top:2px">✓</span>Multi-framework crosswalk (NIST, ISO, SOC 2)</li><li style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start"><span style="color:var(--muted2);flex-shrink:0;margin-top:2px">✓</span>CIS v8.1 audit work program</li><li style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start"><span style="color:var(--muted2);flex-shrink:0;margin-top:2px">✓</span>1-hour orientation walkthrough</li>
         </ul>
-      </div><div style="padding:32px;background:var(--canvas);border-radius:var(--radius);border-top:4px solid var(--teal-d);position:relative">
+      </div><div style="padding:32px;background:rgba(245,248,250,0.7);border-radius:var(--radius);border-top:4px solid var(--teal-d);position:relative">
         <div style='position:absolute;top:16px;right:16px;background:var(--teal);color:white;font-size:10px;font-weight:700;letter-spacing:.08em;padding:3px 10px;border-radius:99px'>POPULAR</div>
         <div style="font-family:var(--mono);font-size:10px;color:var(--teal-d);font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">CIS + Public Sector</div>
         <h3 style="font-size:19px;font-weight:700;color:var(--navy);margin-bottom:8px">CIS + AI + Ontario Bill 194</h3>
@@ -317,7 +393,7 @@ a:hover{text-decoration:underline}
         <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
           <li style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start"><span style="color:var(--teal-d);flex-shrink:0;margin-top:2px">✓</span>Everything in Core CIS, plus:</li><li style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start"><span style="color:var(--teal-d);flex-shrink:0;margin-top:2px">✓</span>AI Governance Policy (NIST AI RMF, ISO 42001)</li><li style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start"><span style="color:var(--teal-d);flex-shrink:0;margin-top:2px">✓</span>Ontario Bill 194 Compliance Guide</li><li style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start"><span style="color:var(--teal-d);flex-shrink:0;margin-top:2px">✓</span>PIA methodology (FIPPA s.38(3))</li><li style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start"><span style="color:var(--teal-d);flex-shrink:0;margin-top:2px">✓</span>Breach notification / RROSH guidance</li><li style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start"><span style="color:var(--teal-d);flex-shrink:0;margin-top:2px">✓</span>Bill 194 implementation roadmap</li>
         </ul>
-      </div><div style="padding:32px;background:var(--canvas);border-radius:var(--radius);border-top:4px solid var(--tan);position:relative">
+      </div><div style="padding:32px;background:rgba(245,248,250,0.7);border-radius:var(--radius);border-top:4px solid var(--tan);position:relative">
         
         <div style="font-family:var(--mono);font-size:10px;color:var(--tan);font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">Complete Suite</div>
         <h3 style="font-size:19px;font-weight:700;color:var(--navy);margin-bottom:8px">Full Multi-Framework Coverage</h3>
@@ -327,7 +403,7 @@ a:hover{text-decoration:underline}
         </ul>
       </div>
     </div>
-    <div style="margin-top:28px;padding:24px;background:var(--canvas);border-radius:var(--radius);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+    <div style="margin-top:28px;padding:24px;background:rgba(245,248,250,0.7);border-radius:var(--radius);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
       <div>
         <strong style="font-size:15px;color:var(--navy)">Policy Integration Service & Annual Maintenance</strong>
         <p style="font-size:13px;color:var(--muted);margin-top:4px">We review your existing policies, map gaps, customize language, and deliver a prioritized implementation roadmap. Annual maintenance keeps your policies current as frameworks evolve.</p>
@@ -338,7 +414,7 @@ a:hover{text-decoration:underline}
 </section>
 
 <!-- INFRASTRUCTURE -->
-<section class="section" style="background:var(--canvas)" id="infrastructure">
+<section class="section" style="background:rgba(245,248,250,0.7)" id="infrastructure">
   <div class="container">
     <div style="max-width:760px">
       <div class="section-eyebrow">Infrastructure</div>
@@ -348,7 +424,7 @@ a:hover{text-decoration:underline}
     <div class="grid-4">
       <div class="card" style="text-align:center"><div class="card-icon" style="margin:0 auto 12px">🌐</div><h3 style="font-size:15px">Network Design & Build</h3><p style="font-size:13px">LAN/WAN design, structured cabling, switching, routing, and wireless infrastructure for offices and municipal facilities.</p></div><div class="card" style="text-align:center"><div class="card-icon" style="margin:0 auto 12px">🖥️</div><h3 style="font-size:15px">Infrastructure</h3><p style="font-size:13px">Server environments, virtualization, storage, backup systems, and disaster recovery planning.</p></div><div class="card" style="text-align:center"><div class="card-icon" style="margin:0 auto 12px">📦</div><h3 style="font-size:15px">Application Support</h3><p style="font-size:13px">Installation, configuration, and ongoing support for business and municipal applications. Upgrades, migrations, and integrations.</p></div><div class="card" style="text-align:center"><div class="card-icon" style="margin:0 auto 12px">🔧</div><h3 style="font-size:15px">Ongoing Maintenance</h3><p style="font-size:13px">Proactive monitoring, patching, and maintenance programs to keep your infrastructure running reliably.</p></div>
     </div>
-    <div style="margin-top:28px;padding:24px 28px;background:var(--canvas);border-radius:var(--radius);border-left:4px solid var(--teal)">
+    <div style="margin-top:28px;padding:24px 28px;background:rgba(245,248,250,0.7);border-radius:var(--radius);border-left:4px solid var(--teal)">
       <div style="font-family:var(--mono);font-size:10px;font-weight:600;color:var(--teal-d);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px">Certified &amp; Experienced On The Platforms You Use</div>
       <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
         <span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:white;border:1px solid var(--border);border-radius:6px;font-size:12px;font-weight:600;color:var(--navy)">🔶 Fortinet</span><span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:white;border:1px solid var(--border);border-radius:6px;font-size:12px;font-weight:600;color:var(--navy)">🔵 Palo Alto Networks</span><span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:white;border:1px solid var(--border);border-radius:6px;font-size:12px;font-weight:600;color:var(--navy)">🌐 Aruba</span><span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:white;border:1px solid var(--border);border-radius:6px;font-size:12px;font-weight:600;color:var(--navy)">🔷 Cisco</span><span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:white;border:1px solid var(--border);border-radius:6px;font-size:12px;font-weight:600;color:var(--navy)">🏆 CISSP</span><span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:white;border:1px solid var(--border);border-radius:6px;font-size:12px;font-weight:600;color:var(--navy)">🔐 Fortinet NSE 7</span><span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:white;border:1px solid var(--border);border-radius:6px;font-size:12px;font-weight:600;color:var(--navy)">☁️ Microsoft Certified</span>

@@ -178,6 +178,76 @@ a:hover{text-decoration:underline}
   border-color:var(--teal);box-shadow:0 0 0 3px rgba(74,191,176,.12);
 }
 .form-group textarea{resize:vertical;min-height:120px}
+
+/* ── HERO ENHANCEMENTS ── */
+@keyframes scanline{
+  0%{transform:translateY(-100%);opacity:0}
+  10%{opacity:1}
+  90%{opacity:1}
+  100%{transform:translateY(200vh);opacity:0}
+}
+.hero-circuit{
+  position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M0 40h30M50 40h30M40 0v30M40 50v30' stroke='rgba(74,191,176,0.12)' stroke-width='0.8' fill='none'/%3E%3Ccircle cx='40' cy='40' r='3' fill='none' stroke='rgba(74,191,176,0.18)' stroke-width='0.8'/%3E%3Ccircle cx='0' cy='40' r='1.5' fill='rgba(74,191,176,0.15)'/%3E%3Ccircle cx='80' cy='40' r='1.5' fill='rgba(74,191,176,0.15)'/%3E%3Ccircle cx='40' cy='0' r='1.5' fill='rgba(74,191,176,0.15)'/%3E%3Ccircle cx='40' cy='80' r='1.5' fill='rgba(74,191,176,0.15)'/%3E%3C/svg%3E");
+  background-repeat:repeat;
+  opacity:1;
+  pointer-events:none;
+}
+.hero-glow-1{
+  position:absolute;
+  width:600px;height:600px;
+  top:-200px;right:-100px;
+  background:radial-gradient(circle, rgba(74,191,176,0.08) 0%, transparent 65%);
+  pointer-events:none;
+}
+.hero-glow-2{
+  position:absolute;
+  width:400px;height:400px;
+  bottom:-150px;left:-80px;
+  background:radial-gradient(circle, rgba(74,191,176,0.05) 0%, transparent 65%);
+  pointer-events:none;
+}
+.hero-scan{
+  position:absolute;
+  left:0;right:0;
+  height:1px;
+  background:linear-gradient(90deg, transparent 0%, rgba(74,191,176,0.25) 30%, rgba(74,191,176,0.4) 50%, rgba(74,191,176,0.25) 70%, transparent 100%);
+  animation:scanline 8s linear infinite;
+  pointer-events:none;
+}
+.hero-corner-tl{
+  position:absolute;top:24px;left:24px;
+  width:40px;height:40px;
+  border-top:1.5px solid rgba(74,191,176,0.35);
+  border-left:1.5px solid rgba(74,191,176,0.35);
+  pointer-events:none;
+}
+.hero-corner-br{
+  position:absolute;bottom:24px;right:24px;
+  width:40px;height:40px;
+  border-bottom:1.5px solid rgba(74,191,176,0.35);
+  border-right:1.5px solid rgba(74,191,176,0.35);
+  pointer-events:none;
+}
+
+/* ── CIRCUIT GRID BACKGROUND ── */
+body{
+  background-color:#F5F8FA;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F8FA'/%3E%3Cpath d='M0 20h15M25 20h15M20 0v15M20 25v15' stroke='%23C4D8E8' stroke-width='0.6' fill='none'/%3E%3Ccircle cx='20' cy='20' r='2' fill='none' stroke='%23B0C8DC' stroke-width='0.6'/%3E%3Ccircle cx='0' cy='20' r='1.2' fill='%23B0C8DC'/%3E%3Ccircle cx='40' cy='20' r='1.2' fill='%23B0C8DC'/%3E%3Ccircle cx='20' cy='0' r='1.2' fill='%23B0C8DC'/%3E%3Ccircle cx='20' cy='40' r='1.2' fill='%23B0C8DC'/%3E%3C/svg%3E");
+  background-repeat:repeat;
+}
+/* Light canvas sections become semi-transparent so circuit shows through */
+.section,.section-sm{background:rgba(245,248,250,0.75)!important}
+/* Explicitly keep white sections and dark sections opaque */
+.site-nav,.site-footer,
+section[style*="background:var(--navy)"],
+section[style*="background:var(--teal"],
+section[style*="background:linear-gradient"],
+section[style*="padding:72px 0;background:var(--teal"],
+section[style*="padding:64px 0;background:var(--teal"]{background-attachment:local}
+/* Cards always white */
+.card{background:var(--white)!important}
+
 </style>
 
 
@@ -194,8 +264,14 @@ a:hover{text-decoration:underline}
   </div>
 </nav>
 
-<section style="background:linear-gradient(135deg,var(--navy) 0%,#243447 100%);padding:72px 0 60px">
-  <div class="container">
+<section style="background:linear-gradient(135deg,var(--navy) 0%,#243447 100%);padding:72px 0 60px;position:relative;overflow:hidden">
+  <div class="hero-circuit" aria-hidden="true"></div>
+  <div class="hero-glow-1" aria-hidden="true"></div>
+  <div class="hero-glow-2" aria-hidden="true"></div>
+  <div class="hero-scan" aria-hidden="true"></div>
+  <div class="hero-corner-tl" aria-hidden="true"></div>
+  <div class="hero-corner-br" aria-hidden="true"></div>
+  <div class="container" style="position:relative;z-index:1">
     <div class="section-eyebrow" style="color:var(--teal)">Free Resources</div>
     <h1 style="font-size:44px;font-weight:800;color:white;margin-bottom:14px">Tools & Resources</h1>
     <p style="font-size:17px;color:rgba(255,255,255,.6);max-width:560px;line-height:1.7">Free tools, forms, and resources to help you understand and improve your IT security and licensing posture — no obligation, no account required.</p>
@@ -213,7 +289,7 @@ a:hover{text-decoration:underline}
         <p style="font-size:15px;color:rgba(255,255,255,.6);line-height:1.8;margin-bottom:24px">Enter your current Microsoft 365 license quantities and get an instant picture of your cost, security coverage, and where a better licensing mix could save money. Model scenarios side-by-side. Generate a client-ready PDF report. No login required.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap">
           <a href="https://tool.itlogics.ca" target="_blank" class="btn btn-primary">Open the Tool →</a>
-          <a href="https://tool.itlogics.ca/m365_intake_form.html" target="_blank" class="btn btn-outline-white">Complete Intake Form</a>
+          <a href="https://tool.itlogics.ca/m365_intake_form.html" target="_blank" class="btn btn-outline-white">Download Intake Form</a>
         </div>
       </div>
       <div style="flex-shrink:0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:24px;min-width:220px">
@@ -233,14 +309,14 @@ a:hover{text-decoration:underline}
         <a href="https://tool.itlogics.ca/m365_intake_form.html" target="_blank" class="btn btn-secondary" style="margin-top:16px;font-size:13px;padding:9px 18px">Open Intake Form →</a>
       </div>
 
-      <div class="card" style="border:2px dashed var(--border);box-shadow:none;background:var(--canvas)">
+      <div class="card" style="border:2px dashed var(--border);box-shadow:none;background:rgba(245,248,250,0.7)">
         <div class="card-icon" style="background:var(--border2)">🔜</div>
         <h3 style="color:var(--muted2)">CIS v8.1 Self-Assessment Checklist</h3>
         <p>A guided self-assessment checklist for small organizations to evaluate their current security posture against the 18 CIS Critical Security Controls.</p>
         <span style="display:inline-block;margin-top:16px;font-size:12px;color:var(--muted2);font-family:var(--mono)">Coming soon</span>
       </div>
 
-      <div class="card" style="border:2px dashed var(--border);box-shadow:none;background:var(--canvas)">
+      <div class="card" style="border:2px dashed var(--border);box-shadow:none;background:rgba(245,248,250,0.7)">
         <div class="card-icon" style="background:var(--border2)">🔜</div>
         <h3 style="color:var(--muted2)">Ontario Bill 194 Readiness Guide</h3>
         <p>Plain-language overview of what Bill 194 requires, who it applies to, and the practical steps municipalities need to take to demonstrate compliance.</p>
