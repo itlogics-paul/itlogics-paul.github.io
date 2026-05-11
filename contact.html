@@ -291,13 +291,20 @@ a:hover{text-decoration:underline}
 }
 
 /* ── CIRCUIT GRID BACKGROUND ── */
+
+/* ── DARK SECTION OVERRIDE (circuit bg fix) ── */
+section[style*="background:var(--navy)"],
+section[style*="background:#1A2B3C"],
+section[style*="background:var(--teal-l)"],
+.dark-section{background-image:none!important}
+
 body{
   background-color:#F5F8FA;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F8FA'/%3E%3Cpath d='M0 20h15M25 20h15M20 0v15M20 25v15' stroke='%23C4D8E8' stroke-width='0.6' fill='none'/%3E%3Ccircle cx='20' cy='20' r='2' fill='none' stroke='%23B0C8DC' stroke-width='0.6'/%3E%3Ccircle cx='0' cy='20' r='1.2' fill='%23B0C8DC'/%3E%3Ccircle cx='40' cy='20' r='1.2' fill='%23B0C8DC'/%3E%3Ccircle cx='20' cy='0' r='1.2' fill='%23B0C8DC'/%3E%3Ccircle cx='20' cy='40' r='1.2' fill='%23B0C8DC'/%3E%3C/svg%3E");
   background-repeat:repeat;
 }
 /* Light canvas sections become semi-transparent so circuit shows through */
-.section,.section-sm{background:rgba(245,248,250,0.75)!important}
+.section:not([style*="background:#1A"]):not([style*="background:var(--navy)"]),.section-sm:not([style*="background:#1A"]):not([style*="background:var(--navy)"]){background:rgba(245,248,250,0.75)!important}
 /* Explicitly keep white sections and dark sections opaque */
 .site-nav,.site-footer,
 section[style*="background:var(--navy)"],
